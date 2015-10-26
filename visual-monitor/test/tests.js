@@ -41,7 +41,7 @@ var caps = selectedCaps ? capsConfig[selectedCaps] : undefined;
 var providerPrefix = process.env.PROVIDER_PREFIX ? process.env.PROVIDER_PREFIX + '-' : '';
 var testName = selectedCaps ? providerPrefix + selectedCaps : providerPrefix + 'default';
 
-var baseUrl = process.env.BASE_URL ? process.env.BASE_URL : 'http://www.hit.ac.il';
+var baseUrl = process.env.BASE_URL ? process.env.BASE_URL : 'http://www.hit.ac.il/campus-life/overview';
 
 var resultsCallback = process.env.DEBUG ? console.log : shoovWebdrivercss.processResults;
 
@@ -61,13 +61,9 @@ describe('Visual monitor testing', function() {
   it('should show the home page',function(done) {
     client
       .url(baseUrl)
+      .pause(5000)
       .webdrivercss(testName + '.homepage', {
         name: '1',
-        exclude:
-          [
-            // Banner.
-            '.home_banner'
-          ],
         screenWidth: selectedCaps == 'chrome' ? [1200] : undefined,
       }, resultsCallback)
       .call(done);
